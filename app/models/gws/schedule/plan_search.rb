@@ -135,6 +135,11 @@ class Gws::Schedule::PlanSearch
   end
 
   def validate_hours
+    self.min_hour = 0 if min_hour < 0
+    self.min_hour = 23 if min_hour > 23
+    self.max_hour = 0 if max_hour < 0
+    self.max_hour = 23 if max_hour > 23
+
     return if min_hour <= max_hour
 
     self.min_hour, self.max_hour = [min_hour, max_hour].sort
